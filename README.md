@@ -3,7 +3,14 @@
 This repository contains development and deployment files of 4th year Major Project
 
 ## Prerequisites and Learning Materials:
-
+   
+   * Git and Github
+    
+       * [How to Use Git and GitHub](https://in.udacity.com/course/how-to-use-git-and-github--ud775/)
+       * [15 Minute Challenges](https://try.github.io/levels/1/challenges/1)
+       * [Atlassian Git Tutorials](https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud)
+       * [Documentation](https://git-scm.com/docs/gittutorial)
+       
    * HTML5 and CSS3
     
        * [Intro to HTML and CSS](https://in.udacity.com/course/intro-to-html-and-css--ud304)
