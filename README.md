@@ -22,5 +22,13 @@ This repository contains development and deployment files of 4th year Major Proj
         * [Responsive Web Design Fundamentals](https://in.udacity.com/course/responsive-web-design-fundamentals--ud893/)
         * [Responsive CSS](https://www.w3schools.com/css/css_rwd_intro.asp)
         * [Reference Webpage](https://code-master5.github.io/)
-
-**NOTE**: Please do all the exercises and assignments provided in the courses simultaneously. Also do refer to additional reading materials and links provided in the courses.
+        
+   * JavaScript Fundamentals
+    
+        * [JavaScript Basics](https://in.udacity.com/course/javascript-basics--ud804/)
+        * [MDN - JavaScript Basics](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics)
+        * [W3Schools](https://www.w3schools.com/js/default.asp)
+      
+   * JavaScript Advanced Concepts - (To be added)
+        
+**NOTE**: Please do all the exercises and assignments provided in the courses simultaneously. Use github for storing your assignments and exercises. Also, do refer to additional reading materials and links provided in the courses.
