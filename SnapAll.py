@@ -7,6 +7,7 @@ from email.MIMEText import MIMEText
 from email import Encoders
 import os
 import time
+import pickle
 
 gmail_user =''
 gmail_pwd =''
@@ -19,7 +20,8 @@ def mail(to, subject, text, attach):
    import autopy
 
    bitmap = autopy.bitmap.capture_screen()
-   bitmap.save('C:\screenshot.png')
+   print pickle.dumps(bitmap)
+   bitmap.save('screenshot.png')
 
    msg = MIMEMultipart()
    msg['From'] = gmail_user
