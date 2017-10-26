@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Chat Server </title>
+</head>
+<body>
+hii
+
+<script src="socket.io"></script>
+<script>
+	var io = io('http://localhost:3000');
+
+	io.emit("new", "pavan");
+</script>
+</body>
+</html>
