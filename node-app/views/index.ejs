@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Chat Server </title>
+</head>
+<body>
+
+<button onclick="getSnap()"> Create Snap </button>
+
+<button onclick="quit()"> Bye </button>
+
+<script src="socket.io.js"></script>
+<script>
+	var io = io('http://localhost:3000');
+
+	var getSnap = () =>{
+		io.emit("getSnap");
+	}
+	var quit = () => {
+		io.emit("end");
+	}
+</script>
+</body>
+</html>
