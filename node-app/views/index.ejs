@@ -11,15 +11,7 @@
 <button onclick="quit()"> Bye </button>
 
 <script src="socket.io.js"></script>
-<script>
-	var io = io('http://localhost:3000');
+<script src="ips.js"></script>
 
-	var getSnap = () =>{
-		io.emit("getSnap");
-	}
-	var quit = () => {
-		io.emit("end");
-	}
-</script>
 </body>
 </html>

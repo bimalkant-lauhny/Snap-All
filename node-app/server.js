@@ -28,17 +28,32 @@ app.get('/', (req, res) => {
 	res.render('index');
 });
 
-
+let port2 = 3010;
+var ips = ["172.16.19.130","192.168.43.103", "192.168.43.81"];
 io.on("connection", (socket) =>{
 	socket.on("getSnap",() => {
-		console.log("hola");
-		screenshot().then((img) => {
-			fs.writeFile("snap.png", img , "binary" , (err) =>{
-				if(err)
-					console.log(err);
+		console.log("hello");
+		ips.forEach((ip) =>{
+			console.log(ip);
+			let io2 = require('socket.io-client');
+
+			let socket = io2('http://' + ip + ':' + port2);	
+			socket.on('connect', ()=>{
+				console.log("Client connected");
 			});
-			console.log(" Snap taken");
+			// socket.connect('http://' + ip + ':' + port2);
+			socket.emit("getSc");			
+
 		});
+
+
+		// screenshot().then((img) => {
+		// 	fs.writeFile("snap.png", img , "binary" , (err) =>{
+		// 		if(err)
+		// 			console.log(err);
+		// 	});
+		// 	console.log(" Snap taken");
+		// });
 	});
 
 	socket.on("end", () => {
