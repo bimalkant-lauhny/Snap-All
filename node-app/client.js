@@ -33,11 +33,16 @@ io.on("connection", (socket) =>{
 	socket.on("getSc",() => {
 		console.log("hola");
 		screenshot().then((img) => {
-			fs.writeFile("snap2.png", img , "binary" , (err) =>{
-				if(err)
-					console.log(err);
-			});
+			console.log(typeof(img));
+			socket.send(img);
+			// fs.writeFile("snap2.png", img , "binary" , (err) =>{
+			// 	if(err)
+			// 		console.log(err);
+			// });
+
 			console.log(" Snap taken");
+		}).then( () =>{
+
 		});
 	});
 
