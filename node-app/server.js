@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 });
 
 let port2 = 3010;
-var ips = ["172.16.19.130","192.168.43.103", "192.168.43.81"];
+var ips = ["172.16.19.130","192.168.43.103"];
 io.on("connection", (socket) =>{
 	socket.on("getSnap",() => {
 		console.log("hello");
@@ -39,22 +39,25 @@ io.on("connection", (socket) =>{
 
 			let socket = io2('http://' + ip + ':' + port2);	
 			socket.on('connect', ()=>{
-				console.log("Client connected");
+				console.log("Client connected "+ip);
+				// console.log(JSON.parse(data));
+
 			});
-			// socket.connect('http://' + ip + ':' + port2);
+			socket.on('message', (data)=>{
+				console.log("hye");
+				// data = JSON.parse(data);
+				fs.writeFile('public/screenshots/'+ip+'.jpg', data , "binary" , (err) =>{
+					if(err)
+						console.log(err);
+				});
+
+			});
 			socket.emit("getSc");			
 
 		});
-
-
-		// screenshot().then((img) => {
-		// 	fs.writeFile("snap.png", img , "binary" , (err) =>{
-		// 		if(err)
-		// 			console.log(err);
-		// 	});
-		// 	console.log(" Snap taken");
-		// });
 	});
+
+	
 
 	socket.on("end", () => {
 		console.log("Bye bye!")
