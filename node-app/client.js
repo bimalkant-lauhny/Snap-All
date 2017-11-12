@@ -13,7 +13,7 @@ var server = http.createServer(app);
 var io = require('socket.io')(server);
 
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3010;
 
 
 server.listen(port, (err)=>{
@@ -30,10 +30,10 @@ app.get('/', (req, res) => {
 
 
 io.on("connection", (socket) =>{
-	socket.on("getSnap",() => {
+	socket.on("getSc",() => {
 		console.log("hola");
 		screenshot().then((img) => {
-			fs.writeFile("snap.png", img , "binary" , (err) =>{
+			fs.writeFile("snap2.png", img , "binary" , (err) =>{
 				if(err)
 					console.log(err);
 			});
