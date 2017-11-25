@@ -1,19 +1,28 @@
 var http = require('http'),
-	express = require('express'),
 	screenshot = require('screenshot-desktop'),
-	fs   = require('fs')
+	express = require('express')
 
-var app = express();
-app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
-app.use	(express.static(__dirname+"/public"));
+const publicIp = require('public-ip');
+
+
+
+
+
+
+var app = express();	
+
 
 var server = http.createServer(app);
 
 var io = require('socket.io')(server);
 
 
+
+
+
+
 var port = process.env.PORT || 3010;
+
 
 
 server.listen(port, (err)=>{
@@ -21,6 +30,7 @@ server.listen(port, (err)=>{
 		console.log(err);
 		throw err;
 	}
+
 	console.log("Server is running on %d", port);
 });
 
@@ -35,11 +45,6 @@ io.on("connection", (socket) =>{
 		screenshot().then((img) => {
 			console.log(typeof(img));
 			socket.send(img);
-			// fs.writeFile("snap2.png", img , "binary" , (err) =>{
-			// 	if(err)
-			// 		console.log(err);
-			// });
-
 			console.log(" Snap taken");
 		}).then( () =>{
 

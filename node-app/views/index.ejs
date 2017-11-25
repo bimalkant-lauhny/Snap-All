@@ -5,14 +5,22 @@
 </head>
 <body>
 
-<img src="screenshots/localhost.jpg">
+<div class="field">
+	<form action="/getIp" method="post" onsubmit="checkData()">
+		<input type="text" name="netmask" required="required">
+		<input type="text" name="ip" required="required">
+		<button>Submit</button>	
+	</form>	
+</div>
+
+	
 
 <button onclick="getSnap()"> Create Snap </button>
 
 <button onclick="quit()"> Bye </button>
 
-<script src="socket.io.js"></script>
-<script src="ips.js"></script>
+<script src="js/socket.io.js"></script>
+<script src="js/ips.js"></script>
 
 
 

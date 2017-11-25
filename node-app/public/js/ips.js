@@ -6,3 +6,9 @@ var io = io('http://localhost:3000');
 	var quit = () => {
 		io.emit("end");
 	}
+
+
+function checkData(){
+	var ip = document.getElementByName('ip');
+	console.log(ip.value);
+}
