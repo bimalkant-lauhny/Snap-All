@@ -1,11 +1,24 @@
+
 var http = require('http'),
 	express = require('express'),
 	screenshot = require('screenshot-desktop'),
-	fs   = require('fs');
+	fs   = require('fs'),
+	bodyParser = require('body-parser');
+
+
  
 var app = express();
+
+app.use( bodyParser.json() );       
+app.use(bodyParser.urlencoded({     
+  extended: true
+}));	
+
+app.use(express.json());       // to support JSON-encoded bodies
+app.use(express.urlencoded());
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
+
 app.use(function auth(req, res, next) {
 	function raiseErr() {
 		var err = new Error("You are not authenticated!");
@@ -53,27 +66,46 @@ server.listen(port, (err) => {
 	console.log("Server is running on %d", port);
 });
 
+
 app.get('/', (req, res) => {
+	
 	res.render('index');
+
 });
 
-let port2 = 3010;
-var ips = ["172.16.19.130","192.168.43.103", "localhost"];
+var ips = [];
+
+app.post('/getIp', (req, res)=>{
+	var ip = req.body.ip,
+		netMask = req.body.netmask;
+
+		var nm = netMask.split(".");
+		var ipParts = ip.split(".");
+
+		var networkID = ipParts[0] + "." +
+						ipParts[1] + "." +
+						ipParts[2] + ".";
+		for (let i=1; i<255; ++i) {
+			ips.push(networkID + i);
+		} 
+		console.log(ips);
+
+});
+
+var port2 = 3010;
 ioServer.on("connection", (socket) => {
 	socket.on("getSnap",() => {
 		console.log("hello");
 		ips.forEach((ip) => {
 			console.log(ip);
-			let ioClient = require('socket.io-client');
+			var ioClient = require('socket.io-client');
 
-			let socket = ioClient('http://' + ip + ':' + port2);	
+			var socket = ioClient('http://' + ip + ':' + port2);	
 			socket.on('connect', () => {
 				console.log("Client connected "+ip);
-				// console.log(JSON.parse(data));
-
 			});
 			socket.on('message', (data) => {
-				console.log("hye");
+				// console.log("hye");
 				// data = JSON.parse(data);
 				fs.writeFile('public/screenshots/'+ip+'.jpg', data , "binary" , (err) => {
 					if(err)

@@ -1,5 +1,5 @@
 {
-  "name": "chat-server",
+  "name": "snapAll",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -9,11 +9,17 @@
   "author": "Bansal",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
+    "ext-ip": "^0.3.8",
+    "external-ip": "^1.3.1",
+    "externalip": "^1.0.2",
     "fs": "0.0.1-security",
     "http": "0.0.0",
+    "ipware": "^1.0.0",
     "path": "^0.12.7",
+    "public-ip": "^2.3.5",
     "screenshot-desktop": "^1.1.0",
     "socket.io": "^2.0.4",
     "socket.io-client": "^2.0.4"
