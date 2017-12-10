@@ -88,16 +88,12 @@ app.post('/getIp', (req, res)=>{
 		for (let i=1; i<255; ++i) {
 			ips.push(networkID + i);
 		} 
-		console.log(ips);
-
 });
 
 var clientPort = 3010;
 ioServer.on("connection", (socket) => {
 	socket.on("getSnap",() => {
-		console.log("hello");
 		ips.forEach((ip) => {
-			console.log(ip);
 			var ioClient = require('socket.io-client');
 
 			var socket = ioClient('http://' + ip + ':' + clientPort);	
@@ -105,8 +101,6 @@ ioServer.on("connection", (socket) => {
 				console.log("Client connected "+ip);
 			});
 			socket.on('message', (data) => {
-				// console.log("hye");
-				// data = JSON.parse(data);
 				var p = new Promise((resolve, reject) => {
                     fs.writeFile('public/screenshots/'+ip+'.jpg', data , "binary" , (err) => {
                         if(err)
@@ -129,9 +123,7 @@ ioServer.on("connection", (socket) => {
 		});
 	});
 
-	
-
 	socket.on("end", () => {
-		console.log("Bye bye!")
+		console.log("Closing socket connection at port: ", clientPort)
 	});
 });
