@@ -1,37 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> Chat Server </title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<title> snapAll </title>
 </head>
 <body>
 
+
+<header>snapAll</header>
 <div class="field">
-	<form action="/getIp" method="post" onsubmit="checkData()">
-        <p>IP: </p>
-		<input type="text" name="ip" required="required">
-        <br/>
-        <p>Netmask: </p>
-		<input type="text" name="netmask" required="required">
-        <br/>
-		<button>Submit</button>	
+	<form action="/getIp" method="post" onsubmit="checkData()" class="form-group">
+        <label>IP:</label>
+		<input type="text" name="ip" required="required" class="form-control"> &nbsp;&nbsp;
+        <label>Netmask:</label>
+		<input type="text" name="netmask" required="required" class="form-control">
+		<button class="btn btn-danger">Submit</button>	
+
+
 	</form>	
+	<div style="margin-top: 15px;">
+	<button class="btn btn-danger" onclick="getSnap()"> Get Snap </button>
+	<button class="btn btn-danger" onclick="quit()"> Bye </button>
+	</div>
 </div>
 
 <div class="gallery">
-
+	<div class="row multi-columns-row">
+          <div class="col-md-3 col-sm-3 col-xs-6">
+          	<div class="snaps">
+          		<img src="screenshots/sample.jpg">
+          		<div class="ip"> 172.16.28.2 </div>
+          	</div>
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-6">
+          	<div class="snaps">
+	          	<img src="screenshots/sample.jpg">
+    	      	<div class="ip">172.16.28.2 </div>
+    	    </div>
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-6">
+          	<div class="snaps">
+	          	<img src="screenshots/sample.jpg">
+    	      	<div class="ip"> 172.16.16.2 </div>
+    	    </div>
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-6">
+          	<div class="snaps">
+	          	<img src="screenshots/sample.jpg">
+    	      	<div class="ip"> 172.16.16.2 </div>
+    	    </div>
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-6">
+          	<div class="snaps">
+	          	<img src="screenshots/sample.jpg">
+    	      	<div class="ip"> 172.16.16.2 </div>
+    	    </div>
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-6">
+          	<div class="snaps">
+	          	<img src="screenshots/sample.jpg">
+    	      	<div class="ip"> 172.16.16.2 </div>
+    	    </div>
+          </div>
+    </div>      
 </div>
 
-	
+<footer>
+	&copy; All rights reserved 
+</footer>
 
-<button onclick="getSnap()"> Get Snap </button>
 
-<button onclick="quit()"> Bye </button>
-
-<script src="js/socket.io.js"></script>
+<script src="js/soo.js"></script>
 <script src="js/ips.js"></script>
-
-
-
-
 </body>
 </html>
