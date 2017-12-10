@@ -1,0 +1,62 @@
+
+body, html{
+	width: 100%;
+	overflow-x: hidden;
+}
+
+header{
+	width: 100%;
+	text-align: center;
+	height: 50px;
+	color: #555;
+	font-size: 24px;
+	line-height: 50px;
+	box-shadow: 0 3px 10px #444;
+}
+.gallery{
+	width: 90%;
+	margin: 0 auto;
+	margin-top: 30px;
+}
+
+.field{
+	text-align: center;
+	margin-top: 20px;
+}
+
+.form-control{
+	width: 300px;
+	display: inline-block;
+}
+
+.snaps{
+	position: relative;
+	margin: 5px 0;
+	border: 1px solid #333;
+	cursor: pointer;
+	border-bottom: 1px solid #333;
+	-webkit-transition: all 1s ease-out;
+	-moz-transition: all 1s ease-out;
+	transition: all 1s ease-out;
+}
+
+.snaps:hover{
+	transform: scale(1.1);
+	/*top: -5px;*/
+}
+.ip{
+	height: 30px;
+	line-height: 30px;
+	color: #555;
+	text-align: center;
+}
+.gallery img{
+	width: 100%;
+}
+
+footer{
+	background-color: #000;
+	color: #fff;
+	text-align: center;
+	padding: 15px 0;
+}
