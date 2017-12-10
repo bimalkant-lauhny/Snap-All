@@ -4,11 +4,6 @@ var http = require('http'),
 
 const publicIp = require('public-ip');
 
-
-
-
-
-
 var app = express();	
 
 
@@ -16,14 +11,7 @@ var server = http.createServer(app);
 
 var io = require('socket.io')(server);
 
-
-
-
-
-
 var port = process.env.PORT || 3010;
-
-
 
 server.listen(port, (err)=>{
 	if(err){
@@ -38,16 +26,12 @@ app.get('/', (req, res) => {
 	res.render('index');
 });
 
-
 io.on("connection", (socket) =>{
 	socket.on("getSc",() => {
-		console.log("hola");
 		screenshot().then((img) => {
 			console.log(typeof(img));
 			socket.send(img);
 			console.log(" Snap taken");
-		}).then( () =>{
-
 		});
 	});
 

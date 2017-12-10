@@ -54,16 +54,16 @@ var server = http.createServer(app);
 var ioServer = require('socket.io')(server);
 
 
-var port = process.env.PORT || 3000;
+var serverPort = process.env.PORT || 3000;
 
 
 
-server.listen(port, (err) => {
+server.listen(serverPort, (err) => {
 	if(err){
 		console.log(err);
 		throw err;
 	}
-	console.log("Server is running on %d", port);
+	console.log("Server is running on %d", serverPort);
 });
 
 
@@ -92,7 +92,7 @@ app.post('/getIp', (req, res)=>{
 
 });
 
-var port2 = 3010;
+var clientPort = 3010;
 ioServer.on("connection", (socket) => {
 	socket.on("getSnap",() => {
 		console.log("hello");
@@ -100,19 +100,30 @@ ioServer.on("connection", (socket) => {
 			console.log(ip);
 			var ioClient = require('socket.io-client');
 
-			var socket = ioClient('http://' + ip + ':' + port2);	
+			var socket = ioClient('http://' + ip + ':' + clientPort);	
 			socket.on('connect', () => {
 				console.log("Client connected "+ip);
 			});
 			socket.on('message', (data) => {
 				// console.log("hye");
 				// data = JSON.parse(data);
-				fs.writeFile('public/screenshots/'+ip+'.jpg', data , "binary" , (err) => {
-					if(err)
-						console.log(err);
-				});
+				var p = new Promise((resolve, reject) => {
+                    fs.writeFile('public/screenshots/'+ip+'.jpg', data , "binary" , (err) => {
+                        if(err)
+                            reject(err);
+                        else
+                            resolve(ip);
+                    });
+                }).then((ip) => {
+                    console.log("Success Writing Snap of: ", ip);
+                    // server is sending 'ip' to itself, to be caught frontend
+                    ioServer.send(ip);
+                }).catch((err) => {
+                    console.log("Error Writing Snap!");
+                });
 
 			});
+
 			socket.emit("getSc");			
 
 		});

@@ -7,15 +7,23 @@
 
 <div class="field">
 	<form action="/getIp" method="post" onsubmit="checkData()">
-		<input type="text" name="netmask" required="required">
+        <p>IP: </p>
 		<input type="text" name="ip" required="required">
+        <br/>
+        <p>Netmask: </p>
+		<input type="text" name="netmask" required="required">
+        <br/>
 		<button>Submit</button>	
 	</form>	
 </div>
 
+<div class="gallery">
+
+</div>
+
 	
 
-<button onclick="getSnap()"> Create Snap </button>
+<button onclick="getSnap()"> Get Snap </button>
 
 <button onclick="quit()"> Bye </button>
 
