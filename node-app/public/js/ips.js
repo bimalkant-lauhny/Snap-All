@@ -1,16 +1,27 @@
 var io = io('http://localhost:3000');
 
-var getSnap = () => {
+function clearSnaps() {
+    var snapgallery = document.getElementsByClassName("snapgallery")[0];
+    while (snapgallery.firstChild) {
+            snapgallery.removeChild(snapgallery.firstChild);
+    }
+}
+
+function checkData() {
+    clearSnaps();
+	var ip = document.getElementsByName('ip')[0];
+    var netmask = document.getElementsByName('netmask')[0];
+	console.log("IP: ", ip.value);
+	console.log("NetMask: ", netmask.value);
+    return true;
+}
+
+var getSnap = function () {
+    clearSnaps();
     io.emit("getSnap");
-    clearSnaps();
 };
 
-var quit = () => {
-    io.emit("end");
-    clearSnaps();
-};
-
-io.on("message", (ip) => {
+io.on("message", function (ip) {
     console.log("Server sent image write event of: ", ip);
     var snapgallery = document.getElementsByClassName("snapgallery")[0];
 
@@ -36,19 +47,3 @@ io.on("message", (ip) => {
 
     snapgallery.appendChild(snapipdiv);
 });
-
-function clearSnaps() {
-    var snapgallery = document.getElementsByClassName("snapgallery")[0];
-    while (snapgallery.firstChild) {
-            snapgallery.removeChild(snapgallery.firstChild);
-    }
-}
-
-function checkData(){
-	var ip = document.getElementsByName('ip')[0];
-    var netmask = document.getElementsByName('netmask')[0];
-	console.log("IP: ", ip.value);
-	console.log("NetMask: ", netmask.value);
-    clearSnaps();
-    return true;
-}

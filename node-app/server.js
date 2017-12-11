@@ -40,6 +40,7 @@ app.use(function auth(req, res, next) {
 		raiseErr();
 	}
 });
+
 app.use	(express.static(__dirname+"/public"));
 app.use(function(err, req, res, next) {
 	res.writeHead(err.status || 500, {
@@ -58,7 +59,7 @@ var serverPort = process.env.PORT || 3000;
 
 
 
-server.listen(serverPort, (err) => {
+server.listen(serverPort, function (err) {
 	if(err){
 		console.log(err);
 		throw err;
@@ -67,7 +68,7 @@ server.listen(serverPort, (err) => {
 });
 
 
-app.get('/', (req, res) => {
+app.get('/', function (req, res) {
 	
 	res.render('index');
 
@@ -75,7 +76,7 @@ app.get('/', (req, res) => {
 
 var ips = [];
 
-app.post('/getIp', (req, res)=>{
+app.post('/getIp', function (req, res) {
 	var ip = req.body.ip,
 		netMask = req.body.netmask;
 
@@ -91,28 +92,28 @@ app.post('/getIp', (req, res)=>{
 });
 
 var clientPort = 3010;
-ioServer.on("connection", (socket) => {
-	socket.on("getSnap",() => {
-		ips.forEach((ip) => {
+ioServer.on("connection", function (socket) {
+	socket.on("getSnap", function () {
+		ips.forEach(function (ip) {
 			var ioClient = require('socket.io-client');
 
 			var socket = ioClient('http://' + ip + ':' + clientPort);	
-			socket.on('connect', () => {
+			socket.on('connect', function () {
 				console.log("Client connected "+ip);
 			});
-			socket.on('message', (data) => {
+			socket.on('message', function (data) {
 				var p = new Promise((resolve, reject) => {
-                    fs.writeFile('public/screenshots/'+ip+'.jpg', data , "binary" , (err) => {
+                    fs.writeFile('public/screenshots/'+ip+'.jpg', data , "binary" , function (err) {
                         if(err)
                             reject(err);
                         else
                             resolve(ip);
                     });
-                }).then((ip) => {
+                }).then(function (ip) {
                     console.log("Success Writing Snap of: ", ip);
                     // server is sending 'ip' to itself, to be caught frontend
                     ioServer.send(ip);
-                }).catch((err) => {
+                }).catch(function (err) {
                     console.log("Error Writing Snap!");
                 });
 
@@ -120,10 +121,13 @@ ioServer.on("connection", (socket) => {
 
 			socket.emit("getSc");			
 
+            socket.on("disconnect", function() {
+                console.log("Connection closed by IP: ", ip);
+            });
 		});
 	});
 
-	socket.on("end", () => {
-		console.log("Closing socket connection at port: ", clientPort)
+	socket.on("disconnect", function () {
+		console.log("Closed socket connection");
 	});
 });

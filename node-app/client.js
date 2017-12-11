@@ -13,29 +13,28 @@ var io = require('socket.io')(server);
 
 var port = process.env.PORT || 3010;
 
-server.listen(port, (err)=>{
+server.listen(port, function (err) {
 	if(err){
 		console.log(err);
 		throw err;
 	}
-
 	console.log("Server is running on %d", port);
 });
 
-app.get('/', (req, res) => {
+app.get('/', function (req, res) {
 	res.render('index');
 });
 
-io.on("connection", (socket) =>{
-	socket.on("getSc",() => {
-		screenshot().then((img) => {
+io.on("connection", function (socket) {
+	socket.on("getSc",function () {
+		screenshot().then(function (img) {
 			console.log(typeof(img));
 			socket.send(img);
-			console.log(" Snap taken");
+			console.log("Snap Taken.");
 		});
 	});
 
-	socket.on("end", () => {
-		console.log("Bye bye!")
+	socket.on("disconnect", function () {
+		console.log("Connection Closed by server!")
 	});
 });

@@ -10,6 +10,7 @@
 
 
 <header>SnapAll</header>
+
 <div class="field">
 	<form action="/getIp" method="post" onsubmit="checkData()" class="form-group">
         <label>IP:</label>
@@ -17,12 +18,9 @@
         <label>Netmask:</label>
 		<input type="text" name="netmask" required="required" class="form-control">
 		<button class="btn btn-danger">Submit</button>	
-
-
 	</form>	
 	<div style="margin-top: 15px;">
-	<button class="btn btn-danger" onclick="getSnap()"> Get Snap </button>
-	<button class="btn btn-danger" onclick="quit()"> Bye </button>
+	    <button class="btn btn-danger" onclick="getSnap()"> Get Snap </button>
 	</div>
 </div>
 
