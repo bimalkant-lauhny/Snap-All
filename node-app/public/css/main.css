@@ -17,12 +17,15 @@ header{
     position: fixed;
     background: #d9534f;
 }
+
 *{
 	outline: none;
 }
+
 button{
 	cursor: pointer;
 }
+
 label{
 	color: #555;
 	font-weight: 600;
@@ -40,6 +43,7 @@ label{
 
 .form-control{
 	width: 300px;
+    max-width: 20%;
 	display: inline-block;
 }
 
