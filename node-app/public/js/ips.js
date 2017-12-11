@@ -9,10 +9,12 @@ function clearSnaps() {
 
 function checkData() {
     clearSnaps();
-	var ip = document.getElementsByName('ip')[0];
-    var netmask = document.getElementsByName('netmask')[0];
-	console.log("IP: ", ip.value);
-	console.log("NetMask: ", netmask.value);
+	var ip = document.getElementsByName('ip');
+    var netmask = document.getElementsByName('netmask');
+	console.log("IP: ", ip[0].value + "." + ip[1].value + "." + ip[2].value + 
+        "." + ip[3].value);
+	console.log("NetMask: ", netmask[0].value + "." + netmask[1].value + "." + 
+        netmask[2].value + "." + netmask[3].value); 
     return true;
 }
 

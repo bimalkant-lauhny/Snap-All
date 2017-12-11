@@ -13,11 +13,26 @@
 
 <div class="field">
 	<form action="/getIp" method="post" onsubmit="checkData()" class="form-group">
-        <label>IP:</label>
-		<input type="text" name="ip" required="required" class="form-control"> &nbsp;&nbsp;
-        <label>Netmask:</label>
-		<input type="text" name="netmask" required="required" class="form-control">
-		<button class="btn btn-danger">Submit</button>	
+        
+        <div class="fieldrow">
+            <label>IP Addr:</label>
+            <input type="number" name="ip" min="0" max="255" required="required" class="form-control">.
+            <input type="number" name="ip" min="0" max="255" required="required" class="form-control">.
+            <input type="number" name="ip" min="0" max="255" required="required" class="form-control">.
+            <input type="number" name="ip" min="0" max="255" required="required" class="form-control">
+        </div>
+
+        <div class="fieldrow">
+            <label>Netmask:</label>
+            <input type="number" name="netmask" min="0" max="255" required="required" class="form-control">.
+            <input type="number" name="netmask" min="0" max="255" required="required" class="form-control">.
+            <input type="number" name="netmask" min="0" max="255" required="required" class="form-control">.
+            <input type="number" name="netmask" min="0" max="255" required="required" class="form-control">
+        </div>
+
+        <div class="fieldrow">
+            <button class="btn btn-danger">Submit</button>	
+        </div>
 	</form>	
 	<div style="margin-top: 15px;">
 	    <button class="btn btn-danger" onclick="getSnap()"> Get Snap </button>

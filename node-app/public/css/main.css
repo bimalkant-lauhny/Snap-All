@@ -5,18 +5,20 @@ body, html{
     background-color: #F5F5F5;
 }
 
-header{
+header {
+    left: 0;
+    top: 0;
 	width: 100%;
+    position: fixed;
 	text-align: center;
 	height: 60px;
-	color: #000000;
+	color: #F5F5F5;
 	font-size: 30px;
-    font-weight: bold;
 	line-height: 60px;
-	box-shadow: 0 3px 10px #444;
-    position: fixed;
-    background: #117AF3;
+    background-color: #455A64;
+    box-shadow: 0 3px 3px #455A64;
 }
+
 .gallery{
 	width: 90%;
 	margin: 0 auto;
@@ -26,6 +28,25 @@ header{
 .field{
 	text-align: center;
 	margin-top: 80px;
+}
+
+.field input {
+    width: 70px;
+    padding: 5px 0;
+    margin: 5px;
+    font-size: 12px;
+}
+
+.fieldrow {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.fieldrow label {
+    width: 100px;
 }
 
 .form-control{
@@ -63,8 +84,8 @@ header{
 }
 
 footer{
-	background-color: #000;
-	color: #fff;
+	background-color: #455A64;
+	color: #F5F5F5;
 	text-align: center;
 	padding: 15px 0;
     margin-top: 15px;
@@ -72,4 +93,5 @@ footer{
     left: 0;
     bottom: 0;
     width: 100%;
+    box-shadow: 0 -3px 3px #455A64;
 }

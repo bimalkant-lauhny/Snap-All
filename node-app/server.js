@@ -4,8 +4,6 @@ var http = require('http'),
 	screenshot = require('screenshot-desktop'),
 	fs   = require('fs'),
 	bodyParser = require('body-parser');
-
-
  
 var app = express();
 
@@ -54,10 +52,7 @@ var server = http.createServer(app);
 
 var ioServer = require('socket.io')(server);
 
-
 var serverPort = process.env.PORT || 3000;
-
-
 
 server.listen(serverPort, function (err) {
 	if(err){
@@ -67,28 +62,51 @@ server.listen(serverPort, function (err) {
 	console.log("Server is running on %d", serverPort);
 });
 
-
 app.get('/', function (req, res) {
-	
 	res.render('index');
-
 });
 
 var ips = [];
 
 app.post('/getIp', function (req, res) {
+    // get ip and netmask arrays of octets from frontend
 	var ip = req.body.ip,
-		netMask = req.body.netmask;
+		netmask = req.body.netmask;
 
-		var nm = netMask.split(".");
-		var ipParts = ip.split(".");
+    // convert ip and netmask array values from string to number
+    ip = ip.map(function(octet) {
+        return Number(octet);
+    });
 
-		var networkID = ipParts[0] + "." +
-						ipParts[1] + "." +
-						ipParts[2] + ".";
-		for (let i=1; i<255; ++i) {
-			ips.push(networkID + i);
-		} 
+    netmask = netmask.map(function(octet) {
+        return Number(octet);
+    });
+
+    // get from user ip to first ip addr of network
+    ip.forEach(function(v, i) {
+        ip[i] &= netmask[i];
+    });
+
+    // get from netmask octets to remaining addresses in an octet 
+    ip.forEach(function(v, i) {
+        netmask[i] = 255 - netmask[i];
+    });
+
+    console.log("Processed ip and netmask: ", ip, netmask);
+    
+    // generating possible ip addresses and pushing them to ips array in dotted
+    // decimal format
+    for (var i=0; i<=netmask[0]; ++i) {
+        for (var j=0; j<=netmask[1]; ++j) {
+            for (var k=0; k<=netmask[2]; ++k) {
+                for (var l=0; l<=netmask[3]; ++l) {
+                    ips.push((ip[0] + i) + "." + (ip[1] + j) + "." + (ip[2] + k)
+                        + "." + (ip[3] + l)); 
+                }
+            }
+        }
+    }
+    console.log("Last Generated IP: ", ips[ips.length - 1]);
 });
 
 var clientPort = 3010;
