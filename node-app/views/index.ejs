@@ -15,46 +15,52 @@
 	<form action="/getIp" method="post" onsubmit="checkData()" class="form-group">
         
         <div class="fieldrow">
-            <label>IP Addr:</label>
-            <input type="number" name="ip" min="0" max="255" required="required" class="form-control">.
-            <input type="number" name="ip" min="0" max="255" required="required" class="form-control">.
-            <input type="number" name="ip" min="0" max="255" required="required" class="form-control">.
+            <label>IP Addr &nbsp;:</label>
+            <input type="number" name="ip" min="0" max="255" required="required" class="form-control"> <b>.</b>
+            <input type="number" name="ip" min="0" max="255" required="required" class="form-control"> <b>.</b>
+            <input type="number" name="ip" min="0" max="255" required="required" class="form-control"> <b>.</b>
             <input type="number" name="ip" min="0" max="255" required="required" class="form-control">
         </div>
 
         <div class="fieldrow">
             <label>Netmask:</label>
-            <input type="number" name="netmask" min="0" max="255" required="required" class="form-control">.
-            <input type="number" name="netmask" min="0" max="255" required="required" class="form-control">.
-            <input type="number" name="netmask" min="0" max="255" required="required" class="form-control">.
+            <input type="number" name="netmask" min="0" max="255" required="required" class="form-control"> <b>.</b>
+            <input type="number" name="netmask" min="0" max="255" required="required" class="form-control"> <b>.</b>
+            <input type="number" name="netmask" min="0" max="255" required="required" class="form-control"> <b>.</b>
             <input type="number" name="netmask" min="0" max="255" required="required" class="form-control">
         </div>
 
         <div class="fieldrow">
-            <button class="btn btn-danger">Submit</button>	
+            <button class="btn btn-danger" onclick="disableBtn()">Submit</button>	
+      <button class="btn btn-danger" id="snap-btn" onclick="getSnap()" disabled="disabled"> Get Snap </button>
+
         </div>
 	</form>	
-	<div style="margin-top: 15px;">
-	    <button class="btn btn-danger" onclick="getSnap()"> Get Snap </button>
+	<div>
 	</div>
 </div>
 
 <div class="gallery">
 	<div class="snapgallery row multi-columns-row">
-          <div class="snapip col-md-3 col-sm-3 col-xs-6">
-          	<div class="snaps">
-          		<img src="screenshots/sample.jpg" height="150" width="266">
-          		<div class="ip"> 127.0.0.1 </div>
-          	</div>
-          </div>
+          <div class="snapip col-md-3 col-sm-3 col-xs-6"></div>
     </div>      
 </div>
 
+<div class="layer">
+	<div class="close" onclick="hidePreview()"><img src="images/cancel.png"></div>
+	
+</div>
+<div class="preview">
+	<div class="preview-img"></div>
+</div>
+
+
 <footer>
-	&copy; All rights reserved 
+	&copy; All Rights Reserved 
 </footer>
 
 <script src="js/socket.io.js"></script>
+<script src="js/jquery.min.js"></script>
 <script src="js/ips.js"></script>
 
 </body>

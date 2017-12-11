@@ -17,7 +17,7 @@ app.use(express.urlencoded());
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 
-app.use(function auth(req, res, next) {
+app.use(function auth(req, res, next) { // To authorize the user
 	function raiseErr() {
 		var err = new Error("You are not authenticated!");
 		err.status = 401;
