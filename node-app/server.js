@@ -3,7 +3,8 @@ var http = require('http'),
 	express = require('express'),
 	screenshot = require('screenshot-desktop'),
 	fs   = require('fs'),
-	bodyParser = require('body-parser');
+	bodyParser = require('body-parser'),
+    config = require("./config");
  
 var app = express();
 
@@ -32,7 +33,7 @@ app.use(function auth(req, res, next) {
 	var auth = new Buffer(authHeader.split(" ")[1], "base64").toString().split(":");
 	var user = auth[0];
 	var pass = auth[1];
-	if (user === "admin" && pass === "passwd") {
+	if (user === config.username && pass === config.password) {
 		next(); // authorized
 	} else {
 		raiseErr();
@@ -52,7 +53,7 @@ var server = http.createServer(app);
 
 var ioServer = require('socket.io')(server);
 
-var serverPort = process.env.PORT || 3000;
+var serverPort = config.serverPort;
 
 server.listen(serverPort, function (err) {
 	if(err){
@@ -111,7 +112,7 @@ app.post('/getIp', function (req, res) {
     console.log("Last Generated IP: ", ips[ips.length - 1]);
 });
 
-var clientPort = 3010;
+var clientPort = config.clientPort;
 ioServer.on("connection", function (socket) {
 	socket.on("getSnap", function () {
 		ips.forEach(function (ip) {
