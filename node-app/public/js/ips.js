@@ -1,3 +1,4 @@
+
 var io = io('http://localhost:3000');
 
 function clearSnaps() {
@@ -23,6 +24,24 @@ var getSnap = function () {
     io.emit("getSnap");
 };
 
+function disableBtn(){
+    document.getElementById('snap-btn').disabled = false;
+}
+
+function hidePreview(){
+    document.getElementsByClassName('preview')[0].className = "preview";
+    document.getElementsByClassName('layer')[0].className = "layer";
+}
+
+function showPreview(id){
+        console.log("Called");
+        document.getElementsByClassName('preview')[0].className += " final";
+        document.getElementsByClassName('layer')[0].className = "layer final";
+        var html = id.innerHTML;
+        console.log("Img is ",html);
+        document.getElementsByClassName('preview-img')[0].innerHTML = html;
+}
+var counter = 1;
 io.on("message", function (ip) {
     console.log("Server sent image write event of: ", ip);
     var snapgallery = document.getElementsByClassName("snapgallery")[0];
@@ -33,16 +52,26 @@ io.on("message", function (ip) {
     var snapsdiv = document.createElement("div");
     snapsdiv.className = "snaps";
 
+    var att = document.createAttribute("onclick");
+    att.value = "showPreview(this)";
+    snapsdiv.setAttributeNode(att);
+
     var img = document.createElement("img");
     img.src = "screenshots/" + ip + ".jpg";
-    img.height = "150";
+    img.height = "180";
     img.width = "266";
 
     var ipdiv = document.createElement("div");
     ipdiv.className = "ip";
     ipdiv.innerHTML = ip; 
 
+    var pcdiv = document.createElement("div");
+    pcdiv.className = "ip";
+    pcdiv.innerHTML = "PC Number : "+counter;
+    ++counter; 
+
     snapsdiv.appendChild(img);
+    snapsdiv.appendChild(pcdiv);
     snapsdiv.appendChild(ipdiv);
     
     snapipdiv.appendChild(snapsdiv);
