@@ -3,7 +3,8 @@ var http = require('http'),
 	express = require('express'),
 	screenshot = require('screenshot-desktop'),
 	fs   = require('fs'),
-	bodyParser = require('body-parser');
+	bodyParser = require('body-parser'),
+    config = require("./config");
  
 var app = express();
 
@@ -32,7 +33,7 @@ app.use(function auth(req, res, next) { // To authorize the user
 	var auth = new Buffer(authHeader.split(" ")[1], "base64").toString().split(":");
 	var user = auth[0];
 	var pass = auth[1];
-	if (user === "admin" && pass === "passwd") {
+	if (user === config.username && pass === config.password) {
 		next(); // authorized
 	} else {
 		raiseErr();
@@ -52,7 +53,7 @@ var server = http.createServer(app);
 
 var ioServer = require('socket.io')(server);
 
-var serverPort = process.env.PORT || 3000;
+var serverPort = config.serverPort;
 
 server.listen(serverPort, function (err) {
 	if(err){
@@ -96,12 +97,12 @@ app.post('/getIp', function (req, res) {
     
     // generating possible ip addresses and pushing them to ips array in dotted
     // decimal format
-    
     ips = [];
     for (var i=0; i<=netmask[0]; ++i) {
         for (var j=0; j<=netmask[1]; ++j) {
             for (var k=0; k<=netmask[2]; ++k) {
                 for (var l=0; l<=netmask[3]; ++l) {
+                	// ++counter;
                     ips.push((ip[0] + i) + "." + (ip[1] + j) + "." + (ip[2] + k)
                         + "." + (ip[3] + l)); 
                 }
@@ -111,7 +112,9 @@ app.post('/getIp', function (req, res) {
     console.log("Last Generated IP: ", ips[ips.length - 1]);
 });
 
-var clientPort = 3010;
+var counter = 0;
+
+var clientPort = config.clientPort;
 ioServer.on("connection", function (socket) {
 	socket.on("getSnap", function () {
 		ips.forEach(function (ip) {
@@ -145,7 +148,7 @@ ioServer.on("connection", function (socket) {
                 console.log("Connection closed by IP: ", ip);
             });
 		});
-	});
+	})
 
 	socket.on("disconnect", function () {
 		console.log("Closed socket connection");

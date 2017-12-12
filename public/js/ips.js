@@ -1,11 +1,12 @@
 
 var io = io('http://localhost:3000');
-
+var counter = 1;
 function clearSnaps() {
     var snapgallery = document.getElementsByClassName("snapgallery")[0];
     while (snapgallery.firstChild) {
             snapgallery.removeChild(snapgallery.firstChild);
     }
+    counter = 1;
 }
 
 function checkData() {
@@ -41,7 +42,6 @@ function showPreview(id){
         console.log("Img is ",html);
         document.getElementsByClassName('preview-img')[0].innerHTML = html;
 }
-var counter = 1;
 io.on("message", function (ip) {
     console.log("Server sent image write event of: ", ip);
     var snapgallery = document.getElementsByClassName("snapgallery")[0];
@@ -59,7 +59,7 @@ io.on("message", function (ip) {
     var img = document.createElement("img");
     img.src = "screenshots/" + ip + ".jpg";
     img.height = "180";
-    img.width = "266";
+    // img.width = "266";
 
     var ipdiv = document.createElement("div");
     ipdiv.className = "ip";

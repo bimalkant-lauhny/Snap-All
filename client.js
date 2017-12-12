@@ -2,10 +2,7 @@ var http = require('http'),
 	screenshot = require('screenshot-desktop'),
 	express = require('express')
 
-const publicIp = require('public-ip');
-
 var app = express();	
-
 
 var server = http.createServer(app);
 
@@ -28,7 +25,6 @@ app.get('/', function (req, res) {
 io.on("connection", function (socket) {
 	socket.on("getSc",function () {
 		screenshot().then(function (img) {
-			console.log(typeof(img));
 			socket.send(img);
 			console.log("Snap Taken.");
 		});
