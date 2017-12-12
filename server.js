@@ -97,12 +97,12 @@ app.post('/getIp', function (req, res) {
     
     // generating possible ip addresses and pushing them to ips array in dotted
     // decimal format
-    
     ips = [];
     for (var i=0; i<=netmask[0]; ++i) {
         for (var j=0; j<=netmask[1]; ++j) {
             for (var k=0; k<=netmask[2]; ++k) {
                 for (var l=0; l<=netmask[3]; ++l) {
+                	// ++counter;
                     ips.push((ip[0] + i) + "." + (ip[1] + j) + "." + (ip[2] + k)
                         + "." + (ip[3] + l)); 
                 }
@@ -146,7 +146,7 @@ ioServer.on("connection", function (socket) {
                 console.log("Connection closed by IP: ", ip);
             });
 		});
-	});
+	})
 
 	socket.on("disconnect", function () {
 		console.log("Closed socket connection");
